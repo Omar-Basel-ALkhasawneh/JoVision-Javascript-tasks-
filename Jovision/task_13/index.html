@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Prediction</title>
+</head>
+<body>
+    <h1>Age Prediction</h1>
+    <form id="nameForm">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Name" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        document.getElementById('nameForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            const nameInput = document.getElementById('name');
+            const name = nameInput.value;
+
+            fetch(`https://api.agify.io?name=${name}`)
+                .then(response => response.json())
+                .then(({ age }) => {
+                    alert(`Your name is: ${name}\nYour age is: ${age}`);
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                });
+        });
+    </script>
+</body>
+</html>
